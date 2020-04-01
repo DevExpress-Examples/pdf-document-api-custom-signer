@@ -11,7 +11,7 @@ namespace CustomSigner
             using (var signer = new PdfDocumentSigner(@"Document.pdf"))
             {
                 //Create a timestamp:
-                ITsaClient tsaClient = new PdfTsaClient(new Uri(@"http://timestamp.apple.com/ts01"), PdfHashAlgorithm.SHA256);
+                ITsaClient tsaClient = new PdfTsaClient(new Uri(@"https://freetsa.org/tsr"), PdfHashAlgorithm.SHA256);
 
                 //Specify the signature's field name and location:
                 var description = new PdfSignatureFieldInfo(1);
