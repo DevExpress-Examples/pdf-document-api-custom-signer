@@ -48,7 +48,7 @@ Namespace CustomSigner
 		'Specify the signing algoritm's OID:
 		Private Const PKCS1RsaEncryption As String = "1.2.840.113549.1.1.1"
 
-		Private ReadOnly certificate()() As Byte
+		Private ReadOnly certificates()() As Byte
 		Private ReadOnly rsaEngine As IAsymmetricBlockCipher
 
 		'Specify a custom digest calculator:
@@ -68,7 +68,7 @@ Namespace CustomSigner
 			Dim [alias] = pkcs.Aliases.OfType(Of String)().First()
 
 			'Get the certificate's chain:
-			certificate = pkcs.GetCertificateChain([alias]).Select(Function(c) c.Certificate.GetEncoded()).ToArray()
+			certificates = pkcs.GetCertificateChain([alias]).Select(Function(c) c.Certificate.GetEncoded()).ToArray()
 
 			'Initialize the encryption engine:
 			rsaEngine = New Pkcs1Encoding(New RsaBlindedEngine())
@@ -76,7 +76,7 @@ Namespace CustomSigner
 		End Sub
 
 		Protected Overrides Function GetCertificates() As IEnumerable(Of Byte())
-			Return certificate
+			Return certificates
 		End Function
 
 		Protected Overrides Function SignDigest(ByVal digest() As Byte) As Byte()
