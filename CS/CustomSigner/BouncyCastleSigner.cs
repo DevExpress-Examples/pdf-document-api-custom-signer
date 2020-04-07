@@ -51,7 +51,7 @@ namespace CustomSigner
         //Specify the signing algoritm's OID:
         const string PKCS1RsaEncryption = "1.2.840.113549.1.1.1";
 
-        readonly byte[][] certificate;
+        readonly byte[][] certificates;
         readonly IAsymmetricBlockCipher rsaEngine;
 
         //Specify a custom digest calculator:
@@ -67,7 +67,7 @@ namespace CustomSigner
             var alias = pkcs.Aliases.OfType<string>().First();
 
             //Get the certificate's chain:
-            certificate = pkcs.GetCertificateChain(alias).Select(c => c.Certificate.GetEncoded()).ToArray();
+            certificates = pkcs.GetCertificateChain(alias).Select(c => c.Certificate.GetEncoded()).ToArray();
 
             //Initialize the encryption engine:
             rsaEngine = new Pkcs1Encoding(new RsaBlindedEngine());
@@ -76,7 +76,7 @@ namespace CustomSigner
 
         protected override IEnumerable<byte[]> GetCertificates()
         {
-            return certificate;
+            return certificates;
         }
 
         protected override byte[] SignDigest(byte[] digest)
