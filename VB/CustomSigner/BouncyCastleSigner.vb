@@ -18,7 +18,11 @@ Namespace CustomSigner
 
 		Private ReadOnly digest As IDigest
 
-		Public AlgorithmOid As Function(String) DigestUtilities.GetObjectIdentifier(digest.AlgorithmName).Id
+		Public ReadOnly Property AlgorithmOid() As String
+			Get
+				Return DigestUtilities.GetObjectIdentifier(digest.AlgorithmName).Id
+			End Get
+		End Property
 
 		Public Sub New()
 			digest = New Sha512Digest()
@@ -57,7 +61,11 @@ Namespace CustomSigner
 				Return New BouncyCastleDigestCalculator()
 			End Get
 		End Property
-		Protected String As override
+		Protected Overrides ReadOnly Property SigningAlgorithmOID() As String
+			Get
+				Return PKCS1RsaEncryption
+			End Get
+		End Property
 
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
 			MyBase.New(tsaClient)

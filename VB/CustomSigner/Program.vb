@@ -3,12 +3,8 @@ Imports System
 Imports System.Diagnostics
 
 Namespace CustomSigner
-	Friend NotInheritable Class Program
-
-		Private Sub New()
-		End Sub
-
-		Shared Sub Main(ByVal args() As String)
+	Friend Module Program
+		Sub Main(ByVal args() As String)
 			Using signer = New PdfDocumentSigner("Document.pdf")
 				'Create a timestamp:
 				Dim tsaClient As ITsaClient = New PdfTsaClient(New Uri("https://freetsa.org/tsr"), PdfHashAlgorithm.SHA256)
@@ -19,7 +15,7 @@ Namespace CustomSigner
 				description.SignatureBounds = New PdfRectangle(10, 10, 50, 150)
 
 				'Create a custom signer object:
-				Dim bouncyCastleSigner = New BouncyCastleSigner("certificate.pfx", "123", tsaClient)
+				Dim bouncyCastleSigner As New BouncyCastleSigner("certificate.pfx", "123", tsaClient)
 
 				'Apply a signature to a new form field:
 				Dim signatureBuilder = New PdfSignatureBuilder(bouncyCastleSigner, description)
@@ -34,5 +30,5 @@ Namespace CustomSigner
 			End Using
 			Return
 		End Sub
-	End Class
+	End Module
 End Namespace
