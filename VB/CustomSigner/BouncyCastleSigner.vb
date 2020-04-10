@@ -18,12 +18,16 @@ Namespace CustomSigner
 
 		Private ReadOnly digest As IDigest
 
-		Public AlgorithmOid As Function(String) DigestUtilities.GetObjectIdentifier(digest.AlgorithmName).Id
+		Public ReadOnly Property AlgorithmOid As String Implements IDigestCalculator.AlgorithmOid
+			Get
+				Return DigestUtilities.GetObjectIdentifier(digest.AlgorithmName).Id
+			End Get
+		End Property
 
 		Public Sub New()
 			digest = New Sha512Digest()
 		End Sub
-		Public Function ComputeDigest(ByVal stream As Stream) As Byte()
+		Public Function ComputeDigest(ByVal stream As Stream) As Byte() Implements IDigestCalculator.ComputeDigest 
 			digest.Reset()
 			Dim buffer((1024 * 1024) - 1) As Byte
 			Dim readByteCount As Integer
@@ -37,7 +41,7 @@ Namespace CustomSigner
 			digest.DoFinal(result, 0)
 			Return result
 		End Function
-		Public Function GetDigestSize() As Integer
+		Public Function GetDigestSize() As Integer Implements IDigestCalculator.GetDigestSize
 			Return digest.GetDigestSize()
 		End Function
 	End Class
@@ -57,7 +61,13 @@ Namespace CustomSigner
 				Return New BouncyCastleDigestCalculator()
 			End Get
 		End Property
-		Protected String As override
+
+		Protected Overrides ReadOnly Property SigningAlgorithmOID As String
+			Get
+				Return PKCS1RsaEncryption
+			End Get
+		End Property
+
 
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
 			MyBase.New(tsaClient)
