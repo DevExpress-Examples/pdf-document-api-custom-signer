@@ -75,7 +75,7 @@ Namespace CustomSigner
 			Dim pkcs = New Pkcs12Store(System.IO.File.Open(file, FileMode.Open), password.ToCharArray())
 
 			'Get the certificate's alias:
-			Dim [alias] = pkcs.Aliases.OfType(Of String)().First()
+			Dim [alias] = pkcs.Aliases.OfType(Of String)().First(Function(a) pkcs.IsKeyEntry(a))
 
 			'Get the certificate's chain:
 			certificates = pkcs.GetCertificateChain([alias]).Select(Function(c) c.Certificate.GetEncoded()).ToArray()
