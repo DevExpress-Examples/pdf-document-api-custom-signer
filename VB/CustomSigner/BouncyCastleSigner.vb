@@ -93,7 +93,7 @@ Namespace CustomSigner
 			'Create the digest info object
 			'Encrypted by the signer's private key:
 			Dim dInfo = New DigestInfo(New AlgorithmIdentifier(New DerObjectIdentifier(DigestCalculator.AlgorithmOid), DerNull.Instance), digest)
-			Dim digestInfo() As Byte = dInfo.GetEncoded()
+			Dim digestInfo() As Byte = dInfo.GetDerEncoded()
 			Return rsaEngine.ProcessBlock(digestInfo, 0, digestInfo.Length)
 		End Function
 	End Class
