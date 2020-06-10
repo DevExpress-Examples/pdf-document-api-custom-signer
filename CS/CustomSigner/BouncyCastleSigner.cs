@@ -84,7 +84,7 @@ namespace CustomSigner
             //Create the digest info object
             //Encrypted by the signer's private key:
             var dInfo = new DigestInfo(new AlgorithmIdentifier(new DerObjectIdentifier(DigestCalculator.AlgorithmOid), DerNull.Instance), digest);
-            byte[] digestInfo = dInfo.GetDerEncoded();
+            byte[] digestInfo = dInfo.GetEncoded();
             return rsaEngine.ProcessBlock(digestInfo, 0, digestInfo.Length);
         }
     }
