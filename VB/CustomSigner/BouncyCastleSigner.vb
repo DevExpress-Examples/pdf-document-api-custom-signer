@@ -70,7 +70,7 @@ Namespace CustomSigner
 
 
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
-			MyBase.New(tsaClient)
+			MyBase.New(tsaClient, Nothing, Nothing, PdfSignatureProfile.Pdf)
 			'Read PKCS#12 file:
 			Dim pkcs = New Pkcs12Store(System.IO.File.Open(file, FileMode.Open), password.ToCharArray())
 
