@@ -58,7 +58,7 @@ namespace CustomSigner
         protected override IDigestCalculator DigestCalculator { get { return new BouncyCastleDigestCalculator(); } }
         protected override string SigningAlgorithmOID => PKCS1RsaEncryption;
 
-        public BouncyCastleSigner(string file, string password, ITsaClient tsaClient) : base(tsaClient)
+        public BouncyCastleSigner(string file, string password, ITsaClient tsaClient) : base(tsaClient, null, null, PdfSignatureProfile.Pdf)
         {
             //Read PKCS#12 file:
             var pkcs = new Pkcs12Store(File.Open(file, FileMode.Open), password.ToCharArray());
