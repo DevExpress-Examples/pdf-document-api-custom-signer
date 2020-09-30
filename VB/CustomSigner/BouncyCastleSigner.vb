@@ -1,4 +1,6 @@
 ﻿Imports DevExpress.Pdf
+Imports DevExpress.Office.DigitalSignatures
+Imports DevExpress.Office.Tsp
 Imports Org.BouncyCastle.Asn1
 Imports Org.BouncyCastle.Asn1.X509
 Imports Org.BouncyCastle.Crypto
@@ -18,7 +20,7 @@ Namespace CustomSigner
 
 		Private ReadOnly digest As IDigest
 
-		Public ReadOnly Property AlgorithmOid As String Implements IDigestCalculator.AlgorithmOid
+		Public ReadOnly Property AlgorithmOid() As String
 			Get
 				Return DigestUtilities.GetObjectIdentifier(digest.AlgorithmName).Id
 			End Get
@@ -27,7 +29,7 @@ Namespace CustomSigner
 		Public Sub New()
 			digest = New Sha512Digest()
 		End Sub
-		Public Function ComputeDigest(ByVal stream As Stream) As Byte() Implements IDigestCalculator.ComputeDigest 
+		Public Function ComputeDigest(ByVal stream As Stream) As Byte()
 			digest.Reset()
 			Dim buffer((1024 * 1024) - 1) As Byte
 			Dim readByteCount As Integer
@@ -41,7 +43,7 @@ Namespace CustomSigner
 			digest.DoFinal(result, 0)
 			Return result
 		End Function
-		Public Function GetDigestSize() As Integer Implements IDigestCalculator.GetDigestSize
+		Public Function GetDigestSize() As Integer
 			Return digest.GetDigestSize()
 		End Function
 	End Class
@@ -61,16 +63,14 @@ Namespace CustomSigner
 				Return New BouncyCastleDigestCalculator()
 			End Get
 		End Property
-
-		Protected Overrides ReadOnly Property SigningAlgorithmOID As String
+		Protected Overrides ReadOnly Property SigningAlgorithmOID() As String
 			Get
 				Return PKCS1RsaEncryption
 			End Get
 		End Property
 
-
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
-			MyBase.New(tsaClient)
+			MyBase.New(tsaClient, Nothing, Nothing, PdfSignatureProfile.Pdf)
 			'Read PKCS#12 file:
 			Dim pkcs = New Pkcs12Store(System.IO.File.Open(file, FileMode.Open), password.ToCharArray())
 
