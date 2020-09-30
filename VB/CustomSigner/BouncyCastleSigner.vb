@@ -7,6 +7,8 @@ Imports Org.BouncyCastle.Crypto.Encodings
 Imports Org.BouncyCastle.Crypto.Engines
 Imports Org.BouncyCastle.Pkcs
 Imports Org.BouncyCastle.Security
+Imports DevExpress.Office.Tsp
+Imports DevExpress.Office.DigitalSignatures
 Imports System.Collections.Generic
 Imports System.IO
 Imports System.Linq
@@ -70,7 +72,7 @@ Namespace CustomSigner
 
 
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
-			MyBase.New(tsaClient)
+			MyBase.New(tsaClient, Nothing, Nothing, PdfSignatureProfile.Pdf)
 			'Read PKCS#12 file:
 			Dim pkcs = New Pkcs12Store(System.IO.File.Open(file, FileMode.Open), password.ToCharArray())
 

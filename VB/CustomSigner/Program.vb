@@ -1,4 +1,6 @@
 ﻿Imports DevExpress.Pdf
+Imports DevExpress.Office.Tsp
+Imports DevExpress.Office.DigitalSignatures
 Imports System
 Imports System.Diagnostics
 
@@ -11,7 +13,7 @@ Namespace CustomSigner
 		Shared Sub Main(ByVal args() As String)
 			Using signer = New PdfDocumentSigner("Document.pdf")
 				'Create a timestamp:
-				Dim tsaClient As ITsaClient = New PdfTsaClient(New Uri("https://freetsa.org/tsr"), PdfHashAlgorithm.SHA256)
+				Dim tsaClient As ITsaClient = New TsaClient(New Uri("https://freetsa.org/tsr"), HashAlgorithmType.SHA256)
 
 				'Specify the signature's field name and location:
 				Dim description = New PdfSignatureFieldInfo(1)
