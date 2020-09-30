@@ -1,6 +1,8 @@
 ﻿using DevExpress.Pdf;
 using System;
 using System.Diagnostics;
+using DevExpress.Office.Tsp;
+using DevExpress.Office.DigitalSignatures;
 
 namespace CustomSigner
 {
@@ -11,7 +13,7 @@ namespace CustomSigner
             using (var signer = new PdfDocumentSigner(@"Document.pdf"))
             {
                 //Create a timestamp:
-                ITsaClient tsaClient = new PdfTsaClient(new Uri(@"https://freetsa.org/tsr"), PdfHashAlgorithm.SHA256);
+                ITsaClient tsaClient = new TsaClient(new Uri(@"https://freetsa.org/tsr"), HashAlgorithmType.SHA256);
 
                 //Specify the signature's field name and location:
                 var description = new PdfSignatureFieldInfo(1);
