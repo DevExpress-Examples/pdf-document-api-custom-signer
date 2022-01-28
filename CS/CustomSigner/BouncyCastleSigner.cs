@@ -64,7 +64,7 @@ namespace CustomSigner
             var pkcs = new Pkcs12Store(File.Open(file, FileMode.Open), password.ToCharArray());
 
             //Get the certificate's alias:
-            var alias = pkcs.Aliases.OfType<string>().First();
+            var alias = pkcs.Aliases.OfType<string>().First(a => pkcs.IsKeyEntry(a));
 
             //Get the certificate's chain:
             certificates = pkcs.GetCertificateChain(alias).Select(c => c.Certificate.GetEncoded()).ToArray();
@@ -84,7 +84,7 @@ namespace CustomSigner
             //Create the digest info object
             //Encrypted by the signer's private key:
             var dInfo = new DigestInfo(new AlgorithmIdentifier(new DerObjectIdentifier(DigestCalculator.AlgorithmOid), DerNull.Instance), digest);
-            byte[] digestInfo = dInfo.GetDerEncoded();
+            byte[] digestInfo = dInfo.GetEncoded();
             return rsaEngine.ProcessBlock(digestInfo, 0, digestInfo.Length);
         }
     }
