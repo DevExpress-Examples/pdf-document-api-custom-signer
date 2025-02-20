@@ -74,10 +74,12 @@ Namespace CustomSigner
 		Public Sub New(ByVal file As String, ByVal password As String, ByVal tsaClient As ITsaClient)
 			MyBase.New(tsaClient, Nothing, Nothing, PdfSignatureProfile.Pdf)
 			'Read PKCS#12 file:
-			Dim pkcs = New Pkcs12Store(System.IO.File.Open(file, FileMode.Open), password.ToCharArray())
+			Dim pkcs As Pkcs12Store = New Pkcs12StoreBuilder().Build()
+			Dim fs As FileStream = System.IO.File.Open(file, FileMode.Open)
+			pkcs.Load(fs, password.ToCharArray())
 
-			'Get the certificate's alias:
-			Dim [alias] = pkcs.Aliases.OfType(Of String)().First(Function(a) pkcs.IsKeyEntry(a))
+				'Get the certificate's alias:
+				Dim [alias] = pkcs.Aliases.OfType(Of String)().First(Function(a) pkcs.IsKeyEntry(a))
 
 			'Get the certificate's chain:
 			certificates = pkcs.GetCertificateChain([alias]).Select(Function(c) c.Certificate.GetEncoded()).ToArray()

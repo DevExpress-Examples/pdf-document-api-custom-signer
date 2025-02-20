@@ -32,7 +32,7 @@ namespace CustomSigner
                 
                 //Sign and save the document:
                 signer.SaveDocument("SignedDocument.pdf", signatureBuilder);
-                Process.Start("SignedDocument.pdf");
+                Process.Start(new ProcessStartInfo("SignedDocument.pdf") { UseShellExecute = true}) ;
             }
             return;
         }

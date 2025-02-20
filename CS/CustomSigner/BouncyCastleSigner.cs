@@ -63,7 +63,8 @@ namespace CustomSigner
         public BouncyCastleSigner(string file, string password, ITsaClient tsaClient) : base(tsaClient, null, null, PdfSignatureProfile.Pdf)
         {
             //Read PKCS#12 file:
-            var pkcs = new Pkcs12Store(File.Open(file, FileMode.Open), password.ToCharArray());
+            var pkcs = new Pkcs12StoreBuilder().Build();
+            pkcs.Load(File.Open(file, FileMode.Open), password.ToCharArray());
 
             //Get the certificate's alias:
             var alias = pkcs.Aliases.OfType<string>().First(a => pkcs.IsKeyEntry(a));

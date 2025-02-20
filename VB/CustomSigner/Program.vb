@@ -32,7 +32,7 @@ Namespace CustomSigner
 
 				'Sign and save the document:
 				signer.SaveDocument("SignedDocument.pdf", signatureBuilder)
-				Process.Start("SignedDocument.pdf")
+				Process.Start(New ProcessStartInfo("SignedDocument.pdf") With {.UseShellExecute = True})
 			End Using
 			Return
 		End Sub
