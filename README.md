@@ -4,19 +4,33 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
-* [Program.cs](./CS/CustomSigner/Program.cs) (VB: [Program.vb](./VB/CustomSigner/Program.vb))
-* [BouncyCastleTsaClient.cs](./CS/CustomSigner/BouncyCastleSigner.cs)  (VB :[BouncyCastleTsaClient.vb](./VB/CustomSigner/BouncyCastleSigner.vb))
-<!-- default file list end -->
 
 # PDF Document API - Use a Custom Signer Class to Apply Signatures to a PDF Document
 
-The PDF Document API allows you to replace a built-in PKCS#7 signature builder (the Pkcs7Signer class) with a custom signer. Refer to the [Sign Documents](https://docs.devexpress.com/OfficeFileAPI/114623/pdf-document-api/document-security/sign-documents) documentation article for more information.
+The PDF Document API allows you to replace a built-in PKCS#7 signature builder (the `Pkcs7Signer` class) with a custom signer.
 
-The code sample project shows how to create a **Pkcs7SignerBase** descendant to implement a custom signer based on the [Bouncy Castle C# API](https://www.bouncycastle.org/download/bouncy-castle-c/) and calculate a document hash using a custom digest calculator.
+The code sample project shows how to create a `Pkcs7SignerBase` descendant to implement a custom signer based on the [Bouncy Castle C# API](https://www.bouncycastle.org/download/bouncy-castle-c/) and calculate a document hash using a custom digest calculator.
 
-To sign a PDF file using an external web service, retrieve a certificate/certificate chain from the service, and calculate the document hash. Then, sign the calculated document hash with a private key obtained from the external service in the SignDigest method of the BouncyCastleSigner class.
+To sign a PDF file using an external web service, retrieve a certificate/certificate chain from the service, and calculate the document hash. Then, sign the calculated document hash with a private key obtained from the external service in the `SignDigest` method of the `BouncyCastleSigner` class.
+
+>[!IMPORTANT]
+> The Universal Subscription or Office File API Subscription is required to use this example in production code. Please refer to the following page for pricing information: [DevExpress Subscriptions](https://www.devexpress.com/buy/winforms-wpf-blazor-asp-net-maui/)
+
+## Files to Review
+
+* [Program.cs](./CS/CustomSigner/Program.cs) (VB: [Program.vb](./VB/CustomSigner/Program.vb))
+* [BouncyCastleTsaClient.cs](./CS/CustomSigner/BouncyCastleSigner.cs)  (VB :[BouncyCastleTsaClient.vb](./VB/CustomSigner/BouncyCastleSigner.vb))
+
+## Documentation
+
+* [Sign Documents](https://docs.devexpress.com/OfficeFileAPI/114623/pdf-document-api/document-security/sign-documents)
+
+## More Examples
+
+* [Use a Custom Timestamp Client to Apply Signatures to a Document](https://github.com/DevExpress-Examples/pdf-document-api-custom-tsa-client)
+* [Use the Azure Key Vault API to Sign a PDF document](https://github.com/DevExpress-Examples/pdf-document-api-use-azure-key-vault-api-to-sign-document)
+* [Validate Document Signatures](https://github.com/DevExpress-Examples/pdf-document-api-signature-validation)
+
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
 
