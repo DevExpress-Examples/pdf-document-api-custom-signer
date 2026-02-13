@@ -16,7 +16,7 @@ The PDF Document API allows you to create a custom class to use your own object 
 
 The code sample project shows how to create a **Pkcs7SignerBase** descendant to use a custom signer based on the [Bouncy Castle C# API](https://bouncycastle.org/csharp/index.html).
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=pdf-document-api-custom-signer&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=pdf-document-api-custom-signer&~~~was_helpful=no)
 
