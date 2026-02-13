@@ -18,7 +18,7 @@ The code sample project shows how to create a **Pkcs7SignerBase** descendant to 
 
 To sign a PDF file using an external web service, retrieve a certificate/certificate chain from the service, and calculate the document hash. Then, sign the calculated document hash with a private key obtained from the external service in the SignDigest method of the BouncyCastleSigner class.
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=pdf-document-api-custom-signer&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=pdf-document-api-custom-signer&~~~was_helpful=no)
 
